@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { Share2, Download } from 'lucide-react';
+import { Share2, Download, FileX } from 'lucide-react';
 
 interface ResultData {
   name: string;
@@ -356,8 +356,12 @@ const Result = () => {
                     "Your knowledge of retail is as empty as our shelves after a sale.",
                     "Sabziyan arrange karna bhi nahi aata, kya karenge retail mein?",
                     "Aapke answers itne unique the ki hamara system confuse ho gaya.",
-                    "Vishal Mega Mart experience: Aap as customer achhe ho, employee nahi."
-                  ][Math.floor(Math.random() * 4)]}
+                    "Vishal Mega Mart experience: Aap as customer achhe ho, employee nahi.",
+                    "Aapka selection aise hi ho jayega jaise dhaniya free milta hai.",
+                    "Aap retail mein utne hi successful honge jitna watermelon ko aloo kehne par customer maanta hai.",
+                    "Bhindi arrange karne ka talent aapme bilkul nahi hai. Yeh koi YouTube challenge nahi hai.",
+                    "Aap sabzi waale se discount maangne mein expert honge, lekin retail mein nahi."
+                  ][Math.floor(Math.random() * 8)]}
                 </p>
               </div>
             )}
@@ -376,6 +380,13 @@ const Result = () => {
               {resultData.status === 'Selected' && (
                 <Button onClick={handleViewCertificate} className="bg-vmm-blue hover:bg-vmm-blue/90">
                   View Offer Letter
+                </Button>
+              )}
+              
+              {resultData.status === 'Rejected' && (
+                <Button onClick={handleViewCertificate} className="bg-red-600 hover:bg-red-700 text-white">
+                  <FileX className="w-4 h-4 mr-2" />
+                  Rejection Letter (Regret)
                 </Button>
               )}
               
