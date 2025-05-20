@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -15,6 +16,7 @@ interface ResultData {
   timestamp: string;
   status: 'Selected' | 'Rejected' | 'Waitlisted';
   isTopper?: boolean;
+  answers?: Record<number, string>;
 }
 
 const Result = () => {
@@ -25,6 +27,7 @@ const Result = () => {
   const [rollNo, setRollNo] = useState(rollNoFromUrl || '');
   const [resultData, setResultData] = useState<ResultData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [showAnswerFeedback, setShowAnswerFeedback] = useState(false);
 
   useEffect(() => {
     if (rollNoFromUrl) {
@@ -79,6 +82,12 @@ const Result = () => {
       // 10% chance to be a topper if selected
       const isTopper = status === 'Selected' && Math.random() < 0.1;
       
+      // Generate random answers
+      const randomAnswers: Record<number, string> = {};
+      for (let i = 1; i <= 10; i++) {
+        randomAnswers[i] = ['a', 'b', 'c', 'd'][Math.floor(Math.random() * 4)];
+      }
+      
       // Fake data generation
       const generatedData: ResultData = {
         name: `Candidate ${rollNo.slice(-5)}`,
@@ -87,7 +96,8 @@ const Result = () => {
         branch: randomBranch,
         timestamp: new Date().toISOString(),
         status,
-        isTopper
+        isTopper,
+        answers: randomAnswers
       };
       
       setResultData(generatedData);
@@ -180,13 +190,92 @@ const Result = () => {
     }
   };
 
+  const getBrutalFeedback = (questionId: number, answer?: string) => {
+    if (!answer) return "No answer provided. Silent treatment? Vishal Merit Mart doesn't work like that.";
+    
+    const feedbackOptions = [
+      // Question 1: Retail floor manager
+      {
+        a: "Managing inventory? Tumse apna room saaf nahi hota, store kya manage karoge?",
+        b: "Congrats, somehow you got this right. Probably a lucky guess.",
+        c: "Cash registers hi manage kar lo pehle, floor manager banne ka sapna baad me dekh lena.",
+        d: "Display building? Tumse WhatsApp status sahi se nahi banta, store displays kya banayega?"
+      },
+      // Question 2: Customer handling
+      {
+        a: "Kisi aur ko bhej doge? Responsibility se bhaagna Olympic sport hai tumhare liye.",
+        b: "Ignore karke solution? Wah! Tumhara future retail mein utna hi bright hai jitna load shedding ke time bulb.",
+        c: "Listen and find solution? Accidentally sahi jawab de diya. Girlfriend ke messages toh padhte nahi, customer ki complaint kya sunoge?",
+        d: "Sidha discount? Paisa kya tumhare baap ka hai? Cost-benefit analysis ka matlab bhi pata hai?"
+      },
+      // Question 3: Bhindi stacking
+      {
+        a: "Freshest at bottom? Tumse ghar mein bartan dhone ko kaha jaye toh pyramid bana doge kya?",
+        b: "Random pile? Tumhara dimaag bhi aise hi arranged hai kya? Koi system nahi, bas chaos?",
+        c: "Neat rows? Lucky guess! Par real Vishal Merit Mart floor pe 5 minute khade raho, paseene se bhindi phisal jayegi.",
+        d: "Size arrangement se customer ko kya fayda? Instagram pe vegetables ki reels bana rahe ho kya?"
+      },
+      // Question 4: Expired products
+      {
+        a: "Kisi aur ke liye chod do? Responsibility se bhaagna tumhara favorite sport hai kya?",
+        b: "Correct! Par real life mein tum expired products ko discount section mein daal dete, hai na?",
+        c: "Dusre section mein? Yani problem solve nahi ki, bas shift kar di? Minister bano politics mein!",
+        d: "Discount? Expired cheez bechoge? CBI is watching your career choices!"
+      },
+      // Question 5: Broken pickle
+      {
+        a: "Customer se payment? Wah! Customer service ka 'S' bhi nahi pata aur retail mein aana hai.",
+        b: "Sahi jawab! Par asli zindagi mein tum phone nikal ke video banate, viral hone ki umeed mein.",
+        c: "Manager ko call? Har choti problem manager solve kare, toh tum kya karoge? Selfie loge?",
+        d: "Break ke baad? Haan, customer pickle mein slip karke gir jaye tab tak tum chai piyo. Great!"
+      },
+      // Question 6: Parle-G in detergent section
+      {
+        a: "Expert sirf detergent ka? Tumhe Parle-G aur detergent mein antar bhi pata hai?",
+        b: "Cross-selling attempt? Sales mein successful hone ke sapne dekh rahe ho, reality mein customer gusse mein nikal jayega.",
+        c: "Guide politely? Sahi hai, par tumse politeness expect karna desert mein baarish ka intezaar karna hai.",
+        d: "Mazaak soojha? Customer service mein tumhara brilliant future stand-up comedy mein hai."
+      },
+      // Question 7: Missing chips
+      {
+        a: "Previous shift ko blame? Responsibility lene se jitna tum bhagte ho, Olympic mein gold medal milta.",
+        b: "Chup rehna? Honesty tumhari dictionary mein dhundhne se bhi nahi milegi.",
+        c: "Report to supervisor? Chamatkar! Ek sahi jawab. Probably misclick hai.",
+        d: "Khud se chips kharidna? Itna dedication dikhta toh tumhare parents proud hote."
+      },
+      // Question 8: Best discount offer
+      {
+        a: "BOGO? Sahi hai, par tumse yeh offer follow karne ko kaho toh 'Buy 1, Keep 1 Free for yourself' implement karoge.",
+        b: "50% off? Calculation nahi aati toh percentage discount avoid karo, customer ko ullu banane ki ninja technique nahi hai yeh.",
+        c: "Cashback? Isse accha customer ko seedha paisa de do. At least transparent toh hoga.",
+        d: "Free samosa? Food safety inspector bhi customer ban jaega, innovation ka award milega tumhe!"
+      },
+      // Question 9: Sharma ji taking samples
+      {
+        a: "Khud bhi le lo? Dono milke company ka diwaala nikal doge, excellent teamwork!",
+        b: "Selfie lena? Social media pe viral hone ke chakkar mein job se viral ho jaoge - bahar!",
+        c: "Politely inform? Accha hai, par tumhare muh se 'politely' shabd realistic nahi lagta.",
+        d: "Store mic pe announce? Privacy violation ka case karke Sharma ji tumhe job se nikalwa denge."
+      },
+      // Question 10: Measure of successful cashier
+      {
+        a: "Scanning speed? Robot bana hai kya? Customer interaction ka kya?",
+        b: "Carry bag line? Haan, zindagi ka success isi mein hai - ₹5 ki carry bag bechne mein.",
+        c: "Balance efficiency & satisfaction? Theory aati hai, practical mein customer ke saamne stammer karte ho.",
+        d: "Membership card? Sales target ke chakkar mein customer ko itna pareshan karoge ki kabhi wapas na aaye."
+      }
+    ];
+
+    return feedbackOptions[questionId - 1][answer as keyof typeof feedbackOptions[0]] || "Is this even an answer? Merit Mart ke liye nahi, circus ke liye apply karo.";
+  };
+
   const getRemarks = () => {
     if (!resultData) return '';
     
     switch (resultData.status) {
       case 'Selected':
         return [
-          "Congratulations! Somehow you fooled our system. Welcome to Vishal Mega Mart!",
+          "Congratulations! Somehow you fooled our system. Welcome to Vishal Merit Mart!",
           "Your level of desperation impressed our panel. You're exactly what we need.",
           "Your bhindi arranging skills have earned you a spot in our elite team.",
           "Wow! We're as surprised as you are! Welcome aboard."
@@ -209,7 +298,7 @@ const Result = () => {
         ][Math.floor(Math.random() * 4)];
       
       default:
-        return "Thank you for your interest in Vishal Mega Mart.";
+        return "Thank you for your interest in Vishal Merit Mart.";
     }
   };
 
@@ -223,7 +312,7 @@ const Result = () => {
     if (!resultData) return;
 
     try {
-      const shareText = `I ${resultData.status === 'Selected' ? 'got selected' : 'applied'} at Vishal Mega Mart! Score: ${resultData.score}% | Roll No: ${resultData.rollNo} | Check your result at http://vmmcareers.fake`;
+      const shareText = `I ${resultData.status === 'Selected' ? 'got selected' : 'applied'} at Vishal Merit Mart! Score: ${resultData.score}% | Roll No: ${resultData.rollNo} | Check your result at http://vmmcareers.fake`;
       
       if (navigator.share) {
         await navigator.share({
@@ -245,7 +334,7 @@ const Result = () => {
     if (!resultData) return;
     
     const shareText = encodeURIComponent(
-      `I ${resultData.status === 'Selected' ? 'got selected' : 'applied'} at Vishal Mega Mart! Score: ${resultData.score}% | Roll No: ${resultData.rollNo} | Check your result at http://vmmcareers.fake`
+      `I ${resultData.status === 'Selected' ? 'got selected' : 'applied'} at Vishal Merit Mart! Score: ${resultData.score}% | Roll No: ${resultData.rollNo} | Check your result at http://vmmcareers.fake`
     );
     
     let url = '';
@@ -300,7 +389,7 @@ const Result = () => {
                 : '💩 Rejected! Better luck next janam!'
             }</CardTitle>
             <CardDescription className="text-white/90">
-              Vishal Mega Mart Recruitment Drive 2025
+              Vishal Merit Mart Recruitment Drive 2025
             </CardDescription>
           </CardHeader>
           
@@ -348,6 +437,44 @@ const Result = () => {
               <p className="mt-1">{getRemarks()}</p>
             </div>
 
+            {/* Answer Feedback Section */}
+            <div className="mt-6">
+              <Button 
+                variant="outline" 
+                onClick={() => setShowAnswerFeedback(!showAnswerFeedback)} 
+                className="w-full"
+              >
+                {showAnswerFeedback ? "Hide Brutal Feedback" : "Show Answer Feedback (Warning: Brutal!)"}
+              </Button>
+              
+              {showAnswerFeedback && resultData.answers && (
+                <div className="mt-4 space-y-3 bg-gray-50 p-4 rounded-md">
+                  <p className="font-medium text-red-800">Question-by-Question Feedback:</p>
+                  {Object.keys(resultData.answers).map(qId => {
+                    const questionId = parseInt(qId);
+                    return (
+                      <div key={qId} className="p-2 border-b border-gray-200">
+                        <p className="text-sm font-medium">Question {qId}:</p>
+                        <p className="text-sm text-gray-700 mt-1">
+                          {getBrutalFeedback(questionId, resultData.answers?.[questionId])}
+                        </p>
+                      </div>
+                    );
+                  })}
+                  <div className="p-3 mt-2 bg-red-50 border border-red-200 rounded-md">
+                    <p className="text-sm font-medium text-red-800">Overall Assessment:</p>
+                    <p className="mt-1 text-red-700">
+                      {resultData.score < 50 ? 
+                        "Aapke answers dekhkar hamare AI ko bhi fever aa gaya. Isse pehle ki hum bhi tumhari tarah fail ho jayein, ja rahe hain reboot hone." : 
+                        resultData.score < 75 ? 
+                        "Aapne itne galat jawab diye ki humara AI ab depression mein hai. Congratulations for this outstanding achievement!" : 
+                        "Even a broken clock is right twice a day. Tumne bhi kuch answers sahi de diye, but don't let it get to your head."}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
             {resultData.status === 'Rejected' && (
               <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-md">
                 <p className="text-sm font-medium text-red-800">Additional Feedback:</p>
@@ -356,7 +483,7 @@ const Result = () => {
                     "Your knowledge of retail is as empty as our shelves after a sale.",
                     "Sabziyan arrange karna bhi nahi aata, kya karenge retail mein?",
                     "Aapke answers itne unique the ki hamara system confuse ho gaya.",
-                    "Vishal Mega Mart experience: Aap as customer achhe ho, employee nahi.",
+                    "Vishal Merit Mart experience: Aap as customer achhe ho, employee nahi.",
                     "Aapka selection aise hi ho jayega jaise dhaniya free milta hai.",
                     "Aap retail mein utne hi successful honge jitna watermelon ko aloo kehne par customer maanta hai.",
                     "Bhindi arrange karne ka talent aapme bilkul nahi hai. Yeh koi YouTube challenge nahi hai.",
@@ -444,6 +571,15 @@ const Result = () => {
                 </Button>
               </div>
             </div>
+            
+            {/* Merit Mart Certification Stamp */}
+            <div className="mt-8 flex justify-center">
+              <div className="border-2 border-vmm-blue rounded-full p-4 w-32 h-32 flex flex-col items-center justify-center text-center transform -rotate-12 opacity-40">
+                <span className="text-xs font-bold text-vmm-blue">OFFICIAL</span>
+                <span className="text-sm font-bold text-vmm-magenta">SABZIMART</span>
+                <span className="text-xs font-bold text-vmm-blue">CERTIFIED</span>
+              </div>
+            </div>
           </CardContent>
           
           <CardFooter className="flex justify-center border-t pt-4 text-xs text-gray-500">
@@ -460,7 +596,7 @@ const Result = () => {
         <CardHeader>
           <CardTitle>Check Your Result</CardTitle>
           <CardDescription>
-            Enter your roll number to view your Vishal Mega Mart recruitment result
+            Enter your roll number to view your Vishal Merit Mart recruitment result
           </CardDescription>
         </CardHeader>
         

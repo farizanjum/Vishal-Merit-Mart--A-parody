@@ -66,8 +66,8 @@ const Certificate = () => {
   const handleShare = async () => {
     try {
       const shareText = resultData.status === 'Selected'
-        ? `I got selected at Vishal Mega Mart! I'll be joining as a retail professional soon. #VMM2025 #NewJob`
-        : `I got rejected by Vishal Mega Mart! They don't know what they're missing. #VMM2025 #TheirLoss`;
+        ? `I got selected at Vishal Merit Mart! I'll be joining as a retail professional soon. #VMM2025 #NewJob`
+        : `I got rejected by Vishal Merit Mart! They don't know what they're missing. #VMM2025 #TheirLoss`;
       
       if (navigator.share) {
         await navigator.share({
@@ -89,7 +89,7 @@ const Certificate = () => {
     <div className="max-w-4xl mx-auto py-8 px-4">
       <div className="mb-6 flex justify-between items-center">
         <h1 className="text-2xl font-bold text-vmm-blue">
-          {resultData.status === 'Selected' ? 'Vishal Mega Mart Offer Letter' : 'Vishal Mega Mart Rejection Letter'}
+          {resultData.status === 'Selected' ? 'Vishal Merit Mart Offer Letter' : 'Vishal Merit Mart Rejection Letter'}
         </h1>
         <div className="flex gap-3">
           <Button variant="outline" onClick={handleDownloadPDF}>
@@ -109,10 +109,10 @@ const Certificate = () => {
             <div className="flex flex-col items-center">
               <img 
                 src="https://i.ibb.co/203Mn8tx/Vishal-Merit-Mart.png" 
-                alt="Vishal Mega Mart Logo" 
+                alt="Vishal Merit Mart Logo" 
                 className="h-16 mb-2" 
               />
-              <p className="text-xs text-gray-500">Vishal Mega Mart Pvt. Ltd.</p>
+              <p className="text-xs text-gray-500">Vishal Merit Mart Pvt. Ltd.</p>
             </div>
             
             <div className="text-right">
@@ -138,7 +138,7 @@ const Certificate = () => {
                 
                 <p className="font-semibold mb-1">Dear {resultData.name},</p>
                 <p className="mb-4">
-                  We are pleased to offer you employment at Vishal Mega Mart in the position 
+                  We are pleased to offer you employment at Vishal Merit Mart in the position 
                   of <span className="font-semibold">Retail Associate</span> at our {resultData.branch} branch.
                 </p>
                 
@@ -175,7 +175,7 @@ const Certificate = () => {
                 </p>
                 
                 <p>
-                  We look forward to welcoming you to the Vishal Mega Mart family!
+                  We look forward to welcoming you to the Vishal Merit Mart family!
                 </p>
               </>
             ) : (
@@ -185,7 +185,7 @@ const Certificate = () => {
                 
                 <p className="font-semibold mb-1">Dear {resultData.name},</p>
                 <p className="mb-4">
-                  Thank you for your interest in joining Vishal Mega Mart. We regret to inform you that 
+                  Thank you for your interest in joining Vishal Merit Mart. We regret to inform you that 
                   your application for the position of <span className="font-semibold">Retail Associate</span> has been rejected.
                 </p>
                 
@@ -221,7 +221,7 @@ const Certificate = () => {
                 </p>
                 
                 <p>
-                  We wish you the best of luck in your future endeavors far away from Vishal Mega Mart!
+                  We wish you the best of luck in your future endeavors far away from Vishal Merit Mart!
                 </p>
               </>
             )}
@@ -236,13 +236,22 @@ const Certificate = () => {
             <div className="text-right">
               <p className="font-semibold mb-1">Rajesh Agarwal</p>
               <p className="text-sm">HR Director</p>
-              <p className="text-sm">Vishal Mega Mart</p>
+              <p className="text-sm">Vishal Merit Mart</p>
             </div>
           </div>
           
           <div className="mt-12 pt-4 border-t text-center text-xs text-gray-500">
             <p>This is a system-generated {resultData.status === 'Selected' ? 'offer' : 'rejection'} letter. No signature required.</p>
             <p>For any queries, contact hr@vishalmegamart.in</p>
+          </div>
+
+          {/* Large Merit Mart Certification Stamp at the bottom */}
+          <div className="mt-8 flex justify-center">
+            <div className="border-2 border-vmm-blue rounded-full p-4 w-40 h-40 flex flex-col items-center justify-center text-center transform -rotate-12 opacity-40">
+              <span className="text-sm font-bold text-vmm-blue">OFFICIAL</span>
+              <span className="text-lg font-bold text-vmm-magenta">SABZIMART</span>
+              <span className="text-sm font-bold text-vmm-blue">CERTIFIED</span>
+            </div>
           </div>
         </div>
       </Card>
