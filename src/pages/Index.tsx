@@ -14,21 +14,21 @@ const Index = () => {
         <Carousel className="w-full">
           <CarouselContent>
             <CarouselItem>
-              <div className="bg-vmm-magenta text-white p-4 text-center">
+              <div className="bg-vmm-white text-white p-4 text-center">
                 <div className="max-w-5xl mx-auto">
                   <img src="https://i.ibb.co/YBSPpBGG/VMM-Promotional-banner-1.png" alt="VMM Promotional Banner 1" className="w-full h-auto" />
                 </div>
               </div>
             </CarouselItem>
             <CarouselItem>
-              <div className="bg-vmm-magenta text-white p-4 text-center">
+              <div className="bg-vmm-white text-white p-4 text-center">
                 <div className="max-w-5xl mx-auto">
                   <img src="https://i.ibb.co/rKLJ9xJX/VMM-Promotional-banner-2.png" alt="VMM Promotional Banner 2" className="w-full h-auto" />
                 </div>
               </div>
             </CarouselItem>
             <CarouselItem>
-              <div className="bg-vmm-magenta text-white p-4 text-center">
+              <div className="bg-vmm-white text-white p-4 text-center">
                 <div className="max-w-5xl mx-auto">
                   <img src="https://i.ibb.co/jPBTZM98/VMM-Promotional-banner-3.png" alt="VMM Promotional Banner 3" className="w-full h-auto" />
                 </div>
