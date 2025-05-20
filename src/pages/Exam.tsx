@@ -91,56 +91,56 @@ const examQuestions: ExamQuestion[] = [
   },
   {
     id: 6,
-    text: "What is the best way to organize the detergent aisle?",
+    text: "Agar koi customer aapko Parle-G ke baare mein pooche jabki aap Detergent section mein ho, aap kya karenge?",
     options: [
-      { id: "a", text: "By fragrance - floral scents together, citrus together" },
-      { id: "b", text: "By price, most expensive at eye level" },
-      { id: "c", text: "By brand, with bestsellers at eye level" },
-      { id: "d", text: "By weight, heaviest at bottom shelves" }
+      { id: "a", text: "\"Sir, main sirf detergent expert hoon, biscuit nahi bechta\"" },
+      { id: "b", text: "\"Wo raha Parle-G. Waise aapko Surf Excel ka naya variant dikha doon?\"" },
+      { id: "c", text: "Politely guide them to the biscuit aisle or find a colleague to help" },
+      { id: "d", text: "\"Parle-G se kapde nahi dhulte sir, try this Tide instead\"" }
     ],
     correctAnswer: "c"
   },
   {
     id: 7,
-    text: "In case of a shoplifter, what should you NOT do?",
+    text: "During inventory, you notice 50 packets of chips missing. What's your response?",
     options: [
-      { id: "a", text: "Confront them physically" },
-      { id: "b", text: "Report to security discreetly" },
-      { id: "c", text: "Make a mental note of their appearance" },
-      { id: "d", text: "Follow store protocol for reporting" }
+      { id: "a", text: "Blame the previous shift and update records" },
+      { id: "b", text: "Say nothing and hope no one notices" },
+      { id: "c", text: "Report the discrepancy to your supervisor" },
+      { id: "d", text: "Buy replacement chips with your salary to avoid trouble" }
+    ],
+    correctAnswer: "c"
+  },
+  {
+    id: 8,
+    text: "Kaunsa discount offer customers ko sabse zyada attract karta hai according to VMM research?",
+    options: [
+      { id: "a", text: "Buy 1 Get 1 Free" },
+      { id: "b", text: "50% Off on MRP" },
+      { id: "c", text: "Buy for ₹999 and get ₹100 cashback" },
+      { id: "d", text: "Free samosa with purchase above ₹2000" }
     ],
     correctAnswer: "a"
   },
   {
-    id: 8,
-    text: "What's the best strategy for suggestive selling at checkout?",
-    options: [
-      { id: "a", text: "Recommend products unrelated to their purchase" },
-      { id: "b", text: "Suggest complementary items to their purchases" },
-      { id: "c", text: "Tell them about your personal favorites" },
-      { id: "d", text: "Insist they buy more items to get a discount" }
-    ],
-    correctAnswer: "b"
-  },
-  {
     id: 9,
-    text: "During Diwali sale, the store becomes extremely crowded. How do you manage?",
+    text: "If you see Sharma ji filling his shopping bag with extra free samples, you should:",
     options: [
-      { id: "a", text: "Close entry doors when it gets too full" },
-      { id: "b", text: "Implement crowd management and additional staff" },
-      { id: "c", text: "Increase prices to reduce customer volume" },
-      { id: "d", text: "Allow only premium customers to enter" }
+      { id: "a", text: "Join him and take some for yourself" },
+      { id: "b", text: "Take a selfie with him for Instagram" },
+      { id: "c", text: "Politely inform him samples are limited to one per customer" },
+      { id: "d", text: "Announce on store mic: \"Sharma ji pakde gaye!\"" }
     ],
-    correctAnswer: "b"
+    correctAnswer: "c"
   },
   {
     id: 10,
-    text: "What is the most important metric for evaluating a cashier's performance?",
+    text: "The true measure of a successful cashier at VMM is:",
     options: [
-      { id: "a", text: "Speed of checkout only" },
-      { id: "b", text: "Number of items scanned per hour" },
-      { id: "c", text: "Balance of speed, accuracy, and customer service" },
-      { id: "d", text: "Number of customers served regardless of errors" }
+      { id: "a", text: "Number of items scanned per minute" },
+      { id: "b", text: "How politely they can say 'Carry bag lenge? ₹5 extra lagega'" },
+      { id: "c", text: "Balance of efficiency and customer satisfaction" },
+      { id: "d", text: "Talent in convincing customers to take membership cards" }
     ],
     correctAnswer: "c"
   }
