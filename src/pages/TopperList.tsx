@@ -129,7 +129,7 @@ const TopperList = () => {
 
   const shareTopperList = async () => {
     try {
-      const shareText = `Check out the top performers at Vishal Mega Mart Recruitment 2025! #1 is ${toppers[0]?.name} with score ${toppers[0]?.score.toFixed(2)}%. Are you on the list? Check at http://vmmcareers.fake/topper-list`;
+      const shareText = `Check out the top performers at Vishal Mega Mart Recruitment 2025! #1 is ${toppers[0]?.name} with score ${toppers[0]?.score.toFixed(2)}%. Are you on the list? Check at http://www.vishalmeritmart.com/`;
       
       if (navigator.share) {
         await navigator.share({
