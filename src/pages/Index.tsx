@@ -3,10 +3,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Index = () => {
   return (
     <div className="min-h-[80vh]">
+      {/* Promotional Banner */}
+      <div className="bg-vmm-magenta text-white p-4 text-center mb-6">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-xl font-bold">🔥 MEGA HIRING FIESTA! 🔥</p>
+          <p>14,000+ positions available! Last date to apply: 15 June 2025</p>
+        </div>
+      </div>
+
       <div className="py-10 px-4 md:px-6 flex flex-col md:flex-row gap-8">
         <div className="flex-1">
           <div className="mb-8">
@@ -60,6 +69,48 @@ const Index = () => {
                 <p className="text-gray-700">Selected candidates can join within 7 days.</p>
               </CardContent>
             </Card>
+          </div>
+
+          {/* FAQs Section */}
+          <div className="mt-12 border rounded-lg p-6 bg-white">
+            <h2 className="text-2xl font-bold mb-6 text-vmm-blue">Frequently Asked Questions</h2>
+            
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>How can I apply for a job at Vishal Mega Mart?</AccordionTrigger>
+                <AccordionContent>
+                  Simply take our Real Exam on this portal. If you pass, you'll receive an offer letter that you can download and present at your nearest VMM branch. We recommend taking the Mock Test first to practice!
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-2">
+                <AccordionTrigger>What is the minimum qualification required?</AccordionTrigger>
+                <AccordionContent>
+                  The ability to stack bhindi (okra) in a neat row and an extraordinary talent for remembering where everything is placed in the store. Also, 10th pass for most positions.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-3">
+                <AccordionTrigger>What's the difference between Mock Test and Real Exam?</AccordionTrigger>
+                <AccordionContent>
+                  The Mock Test is a practice round that won't affect your application. It helps you prepare for the Real Exam, which determines if you qualify for a position. The Real Exam requires personal details and has a time limit.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-4">
+                <AccordionTrigger>Why do you need my shoe size in the application?</AccordionTrigger>
+                <AccordionContent>
+                  For our Retail Associate positions, we provide comfortable footwear as part of the uniform. Standing all day is part of the job, so we make sure your feet are well taken care of!
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-5">
+                <AccordionTrigger>What is "Sabzi Carrying Capacity" and why do you test for it?</AccordionTrigger>
+                <AccordionContent>
+                  This is a critical skill for our inventory specialists! Being able to efficiently move produce from storage to shelves is essential for keeping our vegetable section stocked and fresh. Higher capacity means higher efficiency!
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
 
           <div className="mt-12">

@@ -75,7 +75,7 @@ const MockTest = () => {
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<Record<number, string>>({});
-  const [rollNo, setRollNo] = useState("");
+  const [failed, setFailed] = useState(false);
 
   const handleAnswerChange = (questionId: number, optionId: string) => {
     setAnswers((prev) => ({
@@ -90,8 +90,11 @@ const MockTest = () => {
       return;
     }
 
-    // Calculate a fun score
-    let calculatedScore = Math.floor(Math.random() * 30) + 70; // Random score between 70-99
+    // Calculate a score between 30-65 to make most people fail
+    const calculatedScore = Math.floor(Math.random() * 35) + 30;
+    
+    // 80% chance of failing
+    const failResult = Math.random() < 0.8;
     
     // Generate feedback for each question
     const feedbackObj: Record<number, string> = {};
@@ -102,60 +105,100 @@ const MockTest = () => {
         feedbackObj[question.id] = selectedOption.feedback;
       }
     });
-
-    // Generate random roll number
-    const randomNum = Math.floor(10000 + Math.random() * 90000);
-    const generatedRollNo = `VM2025X${randomNum}`;
     
     setFeedback(feedbackObj);
     setScore(calculatedScore);
-    setRollNo(generatedRollNo);
+    setFailed(failResult);
     setSubmitted(true);
     
     window.scrollTo(0, 0);
   };
 
-  const getResultMessage = () => {
-    if (score >= 90) {
-      return "You're now eligible for Floor Manager at Ghaziabad Vishal Mart!";
-    } else if (score >= 80) {
-      return "You qualify for Shelf Specialist position at Azamgarh branch!";
-    } else if (score >= 70) {
-      return "You've been selected as Cashier Trainee at Patna location!";
-    } else {
-      return "You're eligible for Security Officer position at any branch!";
-    }
+  const getFailureRoast = () => {
+    const roasts = [
+      "Vishal Mega Mart mein Customer banne ka talent hai aapme. Employee? Na baba na!",
+      "Itne kam marks? Bhool gaye the ya bhool ke answer kiye the?",
+      "Mock test bhi pass nahi ho paya, aur chale hai real exam dene. Wah bhai wah!",
+      "Chalo koi na, dunia mein bahut kuch hai karne ko. Retail just isn't for you!",
+      "Raja ji maaf karna, aapke bas ki baat nahi hai retail business.",
+      "Bhindi arrange karne ke liye bhi dimag lagta hai, jo aapke exam se pata chala... nahi hai!"
+    ];
+    return roasts[Math.floor(Math.random() * roasts.length)];
+  };
+
+  const getSuccessRoast = () => {
+    const roasts = [
+      "Talent hai, lekin itna bhi nahi. Real exam mein dikha denge kaun asli khiladi hai!",
+      "Not bad! Par real exam mein aapko pata chalega asli retail stars kaun hai.",
+      "Congrats! Par abhi real test baaki hai, mere dost!",
+      "Kya baat! Lekin real exam mein bhindi ka weight guess karna padega."
+    ];
+    return roasts[Math.floor(Math.random() * roasts.length)];
   };
 
   if (submitted) {
     return (
       <div className="max-w-3xl mx-auto py-8">
-        <Card className="border-2 border-green-500">
-          <CardHeader className="bg-green-500 text-white text-center">
-            <CardTitle className="text-2xl">📝 Exam Complete!</CardTitle>
+        <Card className={`border-2 ${failed ? 'border-red-500' : 'border-yellow-500'}`}>
+          <CardHeader className={`text-white ${failed ? 'bg-red-500' : 'bg-yellow-500'}`}>
+            <CardTitle className="text-2xl">
+              {failed ? '😂 Arre Bhai Bhai Bhai!' : '😏 Theek Thaak Performance'}
+            </CardTitle>
+            <CardDescription className="text-white">
+              Your score: {score}% {failed ? '(FAILED)' : '(PASSED, barely)'}
+            </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="text-center mb-6">
-              <div className="text-3xl font-bold text-vmm-blue mb-2">Aapka Roll No: #{rollNo}</div>
-              <p className="text-lg text-gray-700 font-medium">Jaake result check karo hamare <strong>'Check Result'</strong> page par. Waise suspense mein rehna bhi ek skill hai.</p>
+              <div className="text-xl font-bold mb-2">
+                {failed ? getFailureRoast() : getSuccessRoast()}
+              </div>
+              <p className="mt-4 text-gray-700">
+                {failed 
+                  ? "Mock test hi fail kar diye, real exam mein toh bhagwaan hi malik hai! Lekin koshish karo, shayad kismet chamak jaye."
+                  : "Abhi toh sirf mock test hai. Real exam mein dekhte hain aap kitne paani mein hain!"}
+              </p>
             </div>
             
+            <div className="space-y-6 mt-8">
+              <h3 className="font-semibold text-lg">Question Feedback:</h3>
+              {mockQuestions.map((question) => (
+                <div key={question.id} className="p-4 bg-gray-50 rounded-md">
+                  <p className="font-medium">{question.id}. {question.text}</p>
+                  {answers[question.id] && (
+                    <div className="mt-2">
+                      <p className="text-gray-700">
+                        Your answer: {question.options.find(opt => opt.id === answers[question.id])?.text}
+                      </p>
+                      <p className="text-sm mt-1 font-medium text-vmm-blue">
+                        {feedback[question.id]}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
             <div className="mt-8 p-5 bg-yellow-50 border border-yellow-200 rounded-md">
-              <p className="text-lg font-medium text-center mb-3">⚠️ Important Notice ⚠️</p>
-              <p>Apne answers bhool jaiye. Result mein aapko batayenge ki aap Vishal Mega Mart material hain ya sirf regular customer hi rahenge zindagi bhar.</p>
+              <p className="text-lg font-medium text-center mb-3">⚠️ Retail Reality Check ⚠️</p>
+              <p>{failed 
+                ? "VMM mein job paaney ke liye mocks nahi, REAL exam clear karna hoga! Waise bhi, ye mock aapke liye bohot zada tha..." 
+                : "Overconfident mat ho jana! Real exam mein bhindi ke pile bhi gir sakte hain!"}</p>
             </div>
           </CardContent>
           <CardFooter className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/exam">
               <Button size="lg" className="bg-vmm-red hover:bg-vmm-red/90">
-                Take Real Exam Now
+                Try Real Exam Instead
               </Button>
             </Link>
-            <Link to="/result">
-              <Button size="lg" variant="outline">
-                Check Your Result
-              </Button>
-            </Link>
+            <Button 
+              onClick={() => window.location.reload()} 
+              size="lg" 
+              variant="outline"
+            >
+              Retry Mock Test
+            </Button>
           </CardFooter>
         </Card>
       </div>
