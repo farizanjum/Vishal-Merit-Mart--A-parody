@@ -8,6 +8,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { toast } from 'sonner';
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 interface ExamQuestion {
   id: number;
@@ -163,6 +164,8 @@ const Exam = () => {
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes in seconds
   const [examStarted, setExamStarted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showResultDialog, setShowResultDialog] = useState(false);
+  const [generatedRollNo, setGeneratedRollNo] = useState('');
 
   useEffect(() => {
     if (!examStarted || timeLeft <= 0) return;
@@ -261,6 +264,7 @@ const Exam = () => {
     const stateCode = formData.city.slice(0, 2).toUpperCase();
     const randomNum = Math.floor(10000 + Math.random() * 90000);
     const rollNo = `VMM25-${stateCode}-${randomNum}`;
+    setGeneratedRollNo(rollNo);
 
     // Calculate score (can be random or based on correct answers)
     let score;
@@ -272,6 +276,9 @@ const Exam = () => {
       score = Math.floor(Math.random() * 30) + 70; // 70-99%
     }
 
+    // Determine if candidate is in top 10 (10% chance)
+    const isTopper = Math.random() < 0.1;
+    
     // Store data in localStorage for result page
     const resultData = {
       name: formData.name,
@@ -279,7 +286,8 @@ const Exam = () => {
       score,
       branch: formData.branch,
       timestamp: new Date().toISOString(),
-      status: score >= 75 ? 'Selected' : (score >= 60 ? 'Waitlisted' : 'Rejected')
+      status: score >= 75 ? 'Selected' : (score >= 60 ? 'Waitlisted' : 'Rejected'),
+      isTopper
     };
     
     localStorage.setItem('vmmExamResult', JSON.stringify(resultData));
@@ -287,7 +295,8 @@ const Exam = () => {
     // Simulate API call delay
     setTimeout(() => {
       setLoading(false);
-      navigate(`/result?roll=${rollNo}`);
+      // Instead of navigating directly to results, show dialog
+      setShowResultDialog(true);
     }, 1500);
   };
 
@@ -305,6 +314,30 @@ const Exam = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-8">
+      {/* Result Dialog */}
+      <AlertDialog open={showResultDialog} onOpenChange={setShowResultDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Exam Submitted Successfully!</AlertDialogTitle>
+            <AlertDialogDescription className="space-y-4">
+              <p>Aapka Roll No: <span className="font-bold text-vmm-blue">{generatedRollNo}</span></p>
+              <p>Jaake result check karo hamare 'Check Result' page par. Waise suspense mein rehna bhi ek skill hai.</p>
+              <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-md mt-3">
+                <p className="text-sm font-medium text-yellow-800">⚠️ Important Notice ⚠️</p>
+                <p className="text-sm text-yellow-700 mt-1">
+                  Apne answers bhool jaiye. Result mein aapko batayenge ki aap Vishal Mega Mart material hain ya sirf regular customer hi rahenge zindagi bhar.
+                </p>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction asChild>
+              <Button onClick={() => navigate('/result')}>Check Result</Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       <Card>
         <CardHeader className="bg-vmm-blue text-white">
           <CardTitle>Vishal Mega Mart Recruitment Exam 2025</CardTitle>

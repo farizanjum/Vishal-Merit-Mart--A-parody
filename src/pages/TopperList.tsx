@@ -1,8 +1,10 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { toast } from 'sonner';
+import { Share2 } from 'lucide-react';
 
 interface Topper {
   name: string;
@@ -13,8 +15,7 @@ interface Topper {
   position: string;
 }
 
-// Fake topper list data
-const toppers: Topper[] = [
+const initialToppers: Topper[] = [
   {
     name: 'Ananya Sharma',
     city: 'Lucknow',
@@ -98,6 +99,78 @@ const toppers: Topper[] = [
 ];
 
 const TopperList = () => {
+  const [toppers, setToppers] = useState<Topper[]>([]);
+  
+  useEffect(() => {
+    // Load toppers from localStorage if available
+    const storedToppers = localStorage.getItem('vmmToppers');
+    
+    if (storedToppers) {
+      try {
+        const parsedToppers = JSON.parse(storedToppers);
+        
+        if (Array.isArray(parsedToppers) && parsedToppers.length > 0) {
+          setToppers(parsedToppers);
+          return;
+        }
+      } catch (e) {
+        console.error('Error parsing toppers from localStorage:', e);
+      }
+    }
+    
+    // Fall back to initial data if nothing in localStorage
+    setToppers(initialToppers);
+    
+    // Store initial toppers if none exist
+    if (!storedToppers) {
+      localStorage.setItem('vmmToppers', JSON.stringify(initialToppers));
+    }
+  }, []);
+
+  const shareTopperList = async () => {
+    try {
+      const shareText = `Check out the top performers at Vishal Mega Mart Recruitment 2025! #1 is ${toppers[0]?.name} with score ${toppers[0]?.score.toFixed(2)}%. Are you on the list? Check at http://vmmcareers.fake/topper-list`;
+      
+      if (navigator.share) {
+        await navigator.share({
+          title: 'VMM Top Performers 2025',
+          text: shareText,
+        });
+        toast.success("Shared successfully!");
+      } else {
+        navigator.clipboard.writeText(shareText);
+        toast.success("Topper list info copied to clipboard!");
+      }
+    } catch (error) {
+      toast.error("Couldn't share topper list");
+      console.error(error);
+    }
+  };
+  
+  const shareOnSocialMedia = (platform: 'whatsapp' | 'twitter' | 'linkedin') => {
+    const shareText = encodeURIComponent(
+      `Check out the top performers at Vishal Mega Mart Recruitment 2025! #1 is ${toppers[0]?.name} with score ${toppers[0]?.score.toFixed(2)}%. Are you on the list? Check at http://vmmcareers.fake/topper-list`
+    );
+    
+    let url = '';
+    
+    switch (platform) {
+      case 'whatsapp':
+        url = `https://wa.me/?text=${shareText}`;
+        break;
+      case 'twitter':
+        url = `https://twitter.com/intent/tweet?text=${shareText}`;
+        break;
+      case 'linkedin':
+        url = `https://www.linkedin.com/sharing/share-offsite/?url=http://vmmcareers.fake/topper-list&summary=${shareText}`;
+        break;
+    }
+    
+    if (url) {
+      window.open(url, '_blank');
+    }
+  };
+
   return (
     <div className="max-w-5xl mx-auto py-8">
       <div className="mb-8 text-center">
@@ -106,6 +179,13 @@ const TopperList = () => {
         <p className="mt-2 text-gray-600">
           Congratulations to our outstanding candidates who scored the highest marks in the recruitment exam!
         </p>
+
+        <div className="mt-4 flex justify-center gap-3">
+          <Button variant="outline" onClick={shareTopperList} className="flex items-center">
+            <Share2 className="w-4 h-4 mr-2" />
+            Share List
+          </Button>
+        </div>
       </div>
 
       <Card className="mb-8 border-2 border-vmm-blue">
@@ -138,7 +218,7 @@ const TopperList = () => {
                     <td className="p-3">{topper.name}</td>
                     <td className="p-3">{topper.city}</td>
                     <td className="p-3">{topper.rollNo}</td>
-                    <td className="p-3 font-semibold text-vmm-blue">{topper.score}%</td>
+                    <td className="p-3 font-semibold text-vmm-blue">{topper.score.toFixed(2)}%</td>
                     <td className="p-3">{topper.position}</td>
                   </tr>
                 ))}
@@ -210,6 +290,36 @@ const TopperList = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
+
+      <div className="mt-8 text-center">
+        <p className="mb-4">Share this list on social media:</p>
+        <div className="flex justify-center gap-3">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => shareOnSocialMedia('whatsapp')}
+            className="bg-green-500 hover:bg-green-600 text-white border-none"
+          >
+            WhatsApp
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => shareOnSocialMedia('twitter')}
+            className="bg-blue-400 hover:bg-blue-500 text-white border-none"
+          >
+            X (Twitter)
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => shareOnSocialMedia('linkedin')}
+            className="bg-blue-700 hover:bg-blue-800 text-white border-none"
+          >
+            LinkedIn
+          </Button>
+        </div>
       </div>
 
       <div className="mt-8 text-center space-y-4">

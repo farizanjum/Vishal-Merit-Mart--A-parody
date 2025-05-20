@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { Share2, Download } from 'lucide-react';
 
 interface ResultData {
   name: string;
@@ -14,6 +14,7 @@ interface ResultData {
   branch: string;
   timestamp: string;
   status: 'Selected' | 'Rejected' | 'Waitlisted';
+  isTopper?: boolean;
 }
 
 const Result = () => {
@@ -49,6 +50,11 @@ const Result = () => {
         setTimeout(() => {
           setResultData(result);
           setLoading(false);
+          
+          // If this is a topper, update the topper list in localStorage
+          if (result.isTopper) {
+            updateTopperList(result);
+          }
         }, 1000);
         return;
       }
@@ -70,6 +76,9 @@ const Result = () => {
       const fakeBranches = ['Lucknow', 'Patna', 'Ghaziabad', 'Kanpur', 'Azamgarh'];
       const randomBranch = fakeBranches[Math.floor(Math.random() * fakeBranches.length)];
       
+      // 10% chance to be a topper if selected
+      const isTopper = status === 'Selected' && Math.random() < 0.1;
+      
       // Fake data generation
       const generatedData: ResultData = {
         name: `Candidate ${rollNo.slice(-5)}`,
@@ -77,12 +86,85 @@ const Result = () => {
         score: randomScore,
         branch: randomBranch,
         timestamp: new Date().toISOString(),
-        status
+        status,
+        isTopper
       };
       
       setResultData(generatedData);
       setLoading(false);
+      
+      // Update topper list if this is a topper
+      if (isTopper) {
+        updateTopperList(generatedData);
+      }
     }, 1500);
+  };
+
+  const updateTopperList = (result: ResultData) => {
+    if (!result.isTopper) return;
+    
+    // Get current topper list or initialize empty array
+    const currentToppers = JSON.parse(localStorage.getItem('vmmToppers') || '[]');
+    
+    // Check if this person is already in the list
+    const existingIndex = currentToppers.findIndex((t: any) => t.rollNo === result.rollNo);
+    
+    if (existingIndex >= 0) {
+      // Update existing topper
+      currentToppers[existingIndex] = {
+        ...currentToppers[existingIndex],
+        score: result.score,
+        branch: result.branch,
+        status: result.status
+      };
+    } else {
+      // Add new topper with some extra fields
+      const awards = [
+        "Cleanest Shelf Arranger",
+        "5/5 in Angry Customer Management",
+        "Fastest Inventory Counter",
+        "Bhindi Stacking Champion",
+        "Most Precise Price Tagger",
+        "Shopping Bag Folding Master",
+        "Display Arrangement Wizard",
+        "Receipt Printing Speedster",
+        "Best Product Knowledge",
+        "Most Efficient Barcoder"
+      ];
+      
+      const positions = [
+        "Floor Manager",
+        "Assistant Floor Manager",
+        "Cashier Specialist",
+        "Inventory Manager",
+        "Floor Executive",
+        "Customer Service Lead",
+        "Visual Merchandiser",
+        "Senior Cashier",
+        "Department Head",
+        "Tech Support Executive"
+      ];
+      
+      const newTopper = {
+        name: result.name,
+        city: result.branch,
+        rollNo: result.rollNo,
+        score: result.score,
+        award: awards[Math.floor(Math.random() * awards.length)],
+        position: positions[Math.floor(Math.random() * positions.length)]
+      };
+      
+      // Add to the list and ensure only top 10 by score are kept
+      currentToppers.push(newTopper);
+    }
+    
+    // Sort by score and keep top 10
+    const topTen = currentToppers
+      .sort((a: any, b: any) => b.score - a.score)
+      .slice(0, 10);
+    
+    // Save back to localStorage
+    localStorage.setItem('vmmToppers', JSON.stringify(topTen));
   };
 
   const getStatusBadgeClass = (status: string) => {
@@ -156,6 +238,32 @@ const Result = () => {
     } catch (error) {
       toast.error("Couldn't share result");
       console.error(error);
+    }
+  };
+
+  const shareOnSocialMedia = (platform: 'whatsapp' | 'twitter' | 'linkedin') => {
+    if (!resultData) return;
+    
+    const shareText = encodeURIComponent(
+      `I ${resultData.status === 'Selected' ? 'got selected' : 'applied'} at Vishal Mega Mart! Score: ${resultData.score}% | Roll No: ${resultData.rollNo} | Check your result at http://vmmcareers.fake`
+    );
+    
+    let url = '';
+    
+    switch (platform) {
+      case 'whatsapp':
+        url = `https://wa.me/?text=${shareText}`;
+        break;
+      case 'twitter':
+        url = `https://twitter.com/intent/tweet?text=${shareText}`;
+        break;
+      case 'linkedin':
+        url = `https://www.linkedin.com/sharing/share-offsite/?url=http://vmmcareers.fake&summary=${shareText}`;
+        break;
+    }
+    
+    if (url) {
+      window.open(url, '_blank');
     }
   };
 
@@ -254,6 +362,16 @@ const Result = () => {
               </div>
             )}
 
+            {resultData.isTopper && (
+              <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-md">
+                <p className="text-sm font-medium text-green-800">Special Recognition:</p>
+                <p className="mt-1 text-green-700">
+                  Congratulations! You've made it to our Top Performers List. 
+                  Check out the Topper List to see your position!
+                </p>
+              </div>
+            )}
+
             <div className="mt-8 flex flex-wrap gap-3 justify-center">
               {resultData.status === 'Selected' && (
                 <Button onClick={handleViewCertificate} className="bg-vmm-blue hover:bg-vmm-blue/90">
@@ -262,6 +380,7 @@ const Result = () => {
               )}
               
               <Button variant="outline" onClick={shareResult}>
+                <Share2 className="w-4 h-4 mr-2" />
                 {resultData.status === 'Rejected' 
                   ? "Share Your Shame"
                   : "Share Result"
@@ -276,6 +395,43 @@ const Result = () => {
                   }
                 </Button>
               </Link>
+              
+              <Link to="/meme-generator">
+                <Button variant="outline" className="border-vmm-magenta text-vmm-magenta hover:bg-vmm-magenta/10">
+                  Create Meme
+                </Button>
+              </Link>
+            </div>
+
+            {/* Social Media Sharing */}
+            <div className="mt-6 pt-4 border-t">
+              <p className="text-center text-sm text-gray-500 mb-3">Share on social media:</p>
+              <div className="flex justify-center gap-3">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => shareOnSocialMedia('whatsapp')}
+                  className="bg-green-500 hover:bg-green-600 text-white border-none"
+                >
+                  WhatsApp
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => shareOnSocialMedia('twitter')}
+                  className="bg-blue-400 hover:bg-blue-500 text-white border-none"
+                >
+                  X (Twitter)
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => shareOnSocialMedia('linkedin')}
+                  className="bg-blue-700 hover:bg-blue-800 text-white border-none"
+                >
+                  LinkedIn
+                </Button>
+              </div>
             </div>
           </CardContent>
           
