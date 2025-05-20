@@ -23,9 +23,11 @@ const Layout: React.FC<LayoutProps> = ({ children, className }) => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex items-center">
-              <div className="text-2xl font-bold text-white">
-                <span className="text-vmm-magenta">VMM</span> Careers
-              </div>
+              <img 
+                src="https://i.ibb.co/203Mn8tx/Vishal-Merit-Mart.png" 
+                alt="VMM Careers" 
+                className="h-10"
+              />
             </Link>
             <nav className="hidden md:block">
               <ul className="flex gap-6">

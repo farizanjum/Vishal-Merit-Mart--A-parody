@@ -121,8 +121,15 @@ const MemeGenerator = () => {
           <CardContent className="pt-6">
             <div 
               ref={memeRef}
-              className="bg-gradient-to-r from-vmm-blue to-vmm-magenta text-white p-8 rounded-md text-center min-h-[200px] flex items-center justify-center"
+              className="bg-gradient-to-r from-vmm-blue to-vmm-magenta text-white p-8 rounded-md text-center min-h-[200px] flex flex-col items-center justify-center"
             >
+              <div className="mb-4">
+                <img 
+                  src="https://i.ibb.co/203Mn8tx/Vishal-Merit-Mart.png" 
+                  alt="VMM Logo" 
+                  className="h-12 mx-auto mb-4" 
+                />
+              </div>
               <h2 className="text-xl md:text-2xl font-bold">{generatedMeme}</h2>
             </div>
           </CardContent>
