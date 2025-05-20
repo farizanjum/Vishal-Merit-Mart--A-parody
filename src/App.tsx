@@ -12,6 +12,8 @@ import Result from "./pages/Result";
 import Certificate from "./pages/Certificate";
 import TopperList from "./pages/TopperList";
 import Layout from "./components/Layout";
+import Cutoff from "./pages/Cutoff";
+import MemeGenerator from "./pages/MemeGenerator";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/result" element={<Layout><Result /></Layout>} />
           <Route path="/certificate" element={<Layout><Certificate /></Layout>} />
           <Route path="/topper-list" element={<Layout><TopperList /></Layout>} />
+          <Route path="/cutoff" element={<Layout><Cutoff /></Layout>} />
+          <Route path="/meme-generator" element={<Layout><MemeGenerator /></Layout>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

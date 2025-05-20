@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Disclaimer } from './Disclaimer';
+import { Menu, X } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,6 +11,12 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, className }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="bg-vmm-blue text-white shadow-md py-4">
@@ -32,21 +39,58 @@ const Layout: React.FC<LayoutProps> = ({ children, className }) => {
                   <Link to="/exam" className="text-white hover:text-vmm-magenta transition-colors">Real Exam</Link>
                 </li>
                 <li>
+                  <Link to="/cutoff" className="text-white hover:text-vmm-magenta transition-colors">Cutoffs</Link>
+                </li>
+                <li>
                   <Link to="/result" className="text-white hover:text-vmm-magenta transition-colors">Check Result</Link>
                 </li>
                 <li>
                   <Link to="/topper-list" className="text-white hover:text-vmm-magenta transition-colors">Toppers</Link>
                 </li>
+                <li>
+                  <Link to="/meme-generator" className="text-white hover:text-vmm-magenta transition-colors">Meme Generator</Link>
+                </li>
               </ul>
             </nav>
             <div className="md:hidden">
-              <button className="p-2 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+              <button className="p-2 text-white" onClick={toggleMobileMenu}>
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
               </button>
             </div>
           </div>
+          
+          {/* Mobile menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-2">
+              <nav className="flex flex-col space-y-3">
+                <Link to="/" className="text-white hover:text-vmm-magenta transition-colors" onClick={toggleMobileMenu}>
+                  Home
+                </Link>
+                <Link to="/mock-test" className="text-white hover:text-vmm-magenta transition-colors" onClick={toggleMobileMenu}>
+                  Mock Test
+                </Link>
+                <Link to="/exam" className="text-white hover:text-vmm-magenta transition-colors" onClick={toggleMobileMenu}>
+                  Real Exam
+                </Link>
+                <Link to="/cutoff" className="text-white hover:text-vmm-magenta transition-colors" onClick={toggleMobileMenu}>
+                  Cutoffs
+                </Link>
+                <Link to="/result" className="text-white hover:text-vmm-magenta transition-colors" onClick={toggleMobileMenu}>
+                  Check Result
+                </Link>
+                <Link to="/topper-list" className="text-white hover:text-vmm-magenta transition-colors" onClick={toggleMobileMenu}>
+                  Toppers
+                </Link>
+                <Link to="/meme-generator" className="text-white hover:text-vmm-magenta transition-colors" onClick={toggleMobileMenu}>
+                  Meme Generator
+                </Link>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 

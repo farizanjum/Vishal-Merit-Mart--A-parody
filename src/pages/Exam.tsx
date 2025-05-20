@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
 import { toast } from 'sonner';
 
 interface ExamQuestion {
@@ -145,6 +146,8 @@ const examQuestions: ExamQuestion[] = [
   }
 ];
 
+const shoeSize = Array.from({ length: 15 }, (_, i) => (i + 5).toString());
+
 const Exam = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -152,7 +155,9 @@ const Exam = () => {
     city: '',
     phone: '',
     email: '',
-    branch: ''
+    branch: '',
+    shoeSize: '',
+    sabziCapacity: [20] // Default to middle of scale
   });
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes in seconds
@@ -202,6 +207,20 @@ const Exam = () => {
     }));
   };
 
+  const handleShoeSizeChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      shoeSize: value
+    }));
+  };
+
+  const handleSabziCapacityChange = (value: number[]) => {
+    setFormData((prev) => ({
+      ...prev,
+      sabziCapacity: value
+    }));
+  };
+
   const handleAnswerChange = (questionId: number, optionId: string) => {
     setAnswers((prev) => ({
       ...prev,
@@ -211,7 +230,7 @@ const Exam = () => {
 
   const handleStartExam = () => {
     // Basic validation
-    if (!formData.name || !formData.city || !formData.phone || !formData.email || !formData.branch) {
+    if (!formData.name || !formData.city || !formData.phone || !formData.email || !formData.branch || !formData.shoeSize) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -340,7 +359,7 @@ const Exam = () => {
                     placeholder="Your email address" 
                   />
                 </div>
-                <div className="space-y-2 md:col-span-2">
+                <div className="space-y-2">
                   <Label htmlFor="branch">Preferred Branch</Label>
                   <Select value={formData.branch} onValueChange={handleBranchChange}>
                     <SelectTrigger>
@@ -354,6 +373,40 @@ const Exam = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="shoeSize">Shoe Size</Label>
+                  <Select value={formData.shoeSize} onValueChange={handleShoeSizeChange}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your shoe size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {shoeSize.map((size) => (
+                        <SelectItem key={size} value={size}>
+                          {size}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-4 md:col-span-2">
+                  <Label htmlFor="sabziCapacity">
+                    Sabzi Carrying Capacity (in kg)
+                  </Label>
+                  <div className="px-2">
+                    <Slider
+                      value={formData.sabziCapacity}
+                      onValueChange={handleSabziCapacityChange}
+                      max={40}
+                      step={1}
+                      className="py-4"
+                    />
+                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                      <span>5kg (Basic)</span>
+                      <span>{formData.sabziCapacity[0]}kg</span>
+                      <span>40kg (Pro)</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
