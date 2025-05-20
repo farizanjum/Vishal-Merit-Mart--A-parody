@@ -13,7 +13,7 @@ const Index = () => {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-vmm-blue mb-4">
               Vishal Mega Mart Recruitment 2025
             </h1>
-            <div className="bg-vmm-red text-white p-2 inline-block rounded">
+            <div className="bg-vmm-magenta text-white p-2 inline-block rounded">
               Apply now! Last date: 15 June 2025
             </div>
             <p className="mt-6 text-lg text-gray-700">
@@ -26,7 +26,7 @@ const Index = () => {
                 <Button size="lg" className="bg-vmm-blue hover:bg-vmm-blue/90">Take Mock Test</Button>
               </Link>
               <Link to="/exam">
-                <Button size="lg" variant="outline" className="border-vmm-red text-vmm-red hover:bg-vmm-red hover:text-white">
+                <Button size="lg" variant="outline" className="border-vmm-magenta text-vmm-magenta hover:bg-vmm-magenta hover:text-white">
                   Start Real Exam
                 </Button>
               </Link>
@@ -76,8 +76,8 @@ const Index = () => {
         </div>
 
         <div className="md:w-1/3">
-          <Card className="border-2 border-vmm-red">
-            <CardHeader className="bg-vmm-red text-white">
+          <Card className="border-2 border-vmm-magenta">
+            <CardHeader className="bg-vmm-magenta text-white">
               <CardTitle>Urgent Recruitment Notice</CardTitle>
               <CardDescription className="text-white/80">Last 2,000 positions remaining!</CardDescription>
             </CardHeader>
@@ -121,7 +121,7 @@ const Index = () => {
             </CardContent>
             <CardFooter>
               <Link to="/exam" className="w-full">
-                <Button className="w-full bg-vmm-red hover:bg-vmm-red/90">Apply Now</Button>
+                <Button className="w-full bg-vmm-magenta hover:bg-vmm-magenta/90">Apply Now</Button>
               </Link>
             </CardFooter>
           </Card>

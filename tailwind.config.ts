@@ -65,10 +65,11 @@ export default {
 				},
 				vmm: {
 					red: '#e5252c',
-					blue: '#1e3a8a',
+					blue: '#354880', // Updated to Metallic Blue
 					lightblue: '#3b82f6',
 					gray: '#f3f4f6',
-					dark: '#1f2937'
+					dark: '#1f2937',
+					magenta: '#C92F6D' // Added Telemagenta
 				}
 			},
 			borderRadius: {
