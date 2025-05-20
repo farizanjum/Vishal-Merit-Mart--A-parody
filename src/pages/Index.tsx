@@ -4,16 +4,40 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const Index = () => {
   return (
     <div className="min-h-[80vh]">
-      {/* Promotional Banner */}
-      <div className="bg-vmm-magenta text-white p-4 text-center mb-6">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xl font-bold">🔥 MEGA HIRING FIESTA! 🔥</p>
-          <p>14,000+ positions available! Last date to apply: 15 June 2025</p>
-        </div>
+      {/* Promotional Banner Carousel */}
+      <div className="mb-6">
+        <Carousel className="w-full">
+          <CarouselContent>
+            <CarouselItem>
+              <div className="bg-vmm-magenta text-white p-4 text-center">
+                <div className="max-w-5xl mx-auto">
+                  <img src="https://i.ibb.co/YBSPpBGG/VMM-Promotional-banner-1.png" alt="VMM Promotional Banner 1" className="w-full h-auto" />
+                </div>
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div className="bg-vmm-magenta text-white p-4 text-center">
+                <div className="max-w-5xl mx-auto">
+                  <img src="https://i.ibb.co/rKLJ9xJX/VMM-Promotional-banner-2.png" alt="VMM Promotional Banner 2" className="w-full h-auto" />
+                </div>
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div className="bg-vmm-magenta text-white p-4 text-center">
+                <div className="max-w-5xl mx-auto">
+                  <img src="https://i.ibb.co/jPBTZM98/VMM-Promotional-banner-3.png" alt="VMM Promotional Banner 3" className="w-full h-auto" />
+                </div>
+              </div>
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious className="left-2" />
+          <CarouselNext className="right-2" />
+        </Carousel>
       </div>
 
       <div className="py-10 px-4 md:px-6 flex flex-col md:flex-row gap-8">

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -196,73 +195,73 @@ const Result = () => {
     const feedbackOptions = [
       // Question 1: Retail floor manager
       {
-        a: "Managing inventory? Tumse apna room saaf nahi hota, store kya manage karoge?",
-        b: "Congrats, somehow you got this right. Probably a lucky guess.",
-        c: "Cash registers hi manage kar lo pehle, floor manager banne ka sapna baad me dekh lena.",
-        d: "Display building? Tumse WhatsApp status sahi se nahi banta, store displays kya banayega?"
+        a: "Managing inventory? Tumse apna room saaf nahi hota, store kya manage karoge? Phir se sochneka please.",
+        b: "Congrats, somehow you got this right. Probably a lucky guess. Ek andha ghodi bhi kabhi kabhi chaand ko dekh leta hai.",
+        c: "Cash registers hi manage kar lo pehle, floor manager banne ka sapna baad me dekh lena. Abhi ke liye ghar jaao.",
+        d: "Display building? Tumse WhatsApp status sahi se nahi banta, store displays kya banayega? Merit Mart mein naukri bhool jao."
       },
       // Question 2: Customer handling
       {
-        a: "Kisi aur ko bhej doge? Responsibility se bhaagna Olympic sport hai tumhare liye.",
-        b: "Ignore karke solution? Wah! Tumhara future retail mein utna hi bright hai jitna load shedding ke time bulb.",
+        a: "Kisi aur ko bhej doge? Responsibility se bhaagna Olympic sport hai tumhare liye. Gold medal pakka hai.",
+        b: "Ignore karke solution? Wah! Tumhara future retail mein utna hi bright hai jitna load shedding ke time bulb. Zero watts.",
         c: "Listen and find solution? Accidentally sahi jawab de diya. Girlfriend ke messages toh padhte nahi, customer ki complaint kya sunoge?",
-        d: "Sidha discount? Paisa kya tumhare baap ka hai? Cost-benefit analysis ka matlab bhi pata hai?"
+        d: "Sidha discount? Paisa kya tumhare baap ka hai? Cost-benefit analysis ka matlab bhi pata hai? Nahi na... expected tha."
       },
       // Question 3: Bhindi stacking
       {
-        a: "Freshest at bottom? Tumse ghar mein bartan dhone ko kaha jaye toh pyramid bana doge kya?",
-        b: "Random pile? Tumhara dimaag bhi aise hi arranged hai kya? Koi system nahi, bas chaos?",
-        c: "Neat rows? Lucky guess! Par real Vishal Merit Mart floor pe 5 minute khade raho, paseene se bhindi phisal jayegi.",
-        d: "Size arrangement se customer ko kya fayda? Instagram pe vegetables ki reels bana rahe ho kya?"
+        a: "Freshest at bottom? Tumse ghar mein bartan dhone ko kaha jaye toh pyramid bana doge kya? Logic kidhar hai?",
+        b: "Random pile? Tumhara dimaag bhi aise hi arranged hai kya? Koi system nahi, bas chaos? VMM mein jagah nahi hai.",
+        c: "Neat rows? Lucky guess! Par real Vishal Merit Mart floor pe 5 minute khade raho, paseene se bhindi phisal jayegi. Tab kya karoge?",
+        d: "Size arrangement se customer ko kya fayda? Instagram pe vegetables ki reels bana rahe ho kya? Influencer bano, shopkeeper nahi."
       },
       // Question 4: Expired products
       {
-        a: "Kisi aur ke liye chod do? Responsibility se bhaagna tumhara favorite sport hai kya?",
-        b: "Correct! Par real life mein tum expired products ko discount section mein daal dete, hai na?",
-        c: "Dusre section mein? Yani problem solve nahi ki, bas shift kar di? Minister bano politics mein!",
-        d: "Discount? Expired cheez bechoge? CBI is watching your career choices!"
+        a: "Kisi aur ke liye chod do? Responsibility se bhaagna tumhara favorite sport hai kya? Olympic mein medal milega isme toh!",
+        b: "Correct! Par real life mein tum expired products ko discount section mein daal dete, hai na? Hume sab malum hai.",
+        c: "Dusre section mein? Yani problem solve nahi ki, bas shift kar di? Minister bano politics mein! VMM mein nahi.",
+        d: "Discount? Expired cheez bechoge? CBI is watching your career choices! Food safety inspector ka number ready rakhna."
       },
       // Question 5: Broken pickle
       {
-        a: "Customer se payment? Wah! Customer service ka 'S' bhi nahi pata aur retail mein aana hai.",
-        b: "Sahi jawab! Par asli zindagi mein tum phone nikal ke video banate, viral hone ki umeed mein.",
-        c: "Manager ko call? Har choti problem manager solve kare, toh tum kya karoge? Selfie loge?",
-        d: "Break ke baad? Haan, customer pickle mein slip karke gir jaye tab tak tum chai piyo. Great!"
+        a: "Customer se payment? Wah! Customer service ka 'S' bhi nahi pata aur retail mein aana hai. Waah beta waah!",
+        b: "Sahi jawab! Par asli zindagi mein tum phone nikal ke video banate, viral hone ki umeed mein. #PickleSlipChallenge trending!",
+        c: "Manager ko call? Har choti problem manager solve kare, toh tum kya karoge? Selfie loge? Initiative kaha hai tumhara?",
+        d: "Break ke baad? Haan, customer pickle mein slip karke gir jaye tab tak tum chai piyo. Great! Lawsuit coming soon..."
       },
       // Question 6: Parle-G in detergent section
       {
-        a: "Expert sirf detergent ka? Tumhe Parle-G aur detergent mein antar bhi pata hai?",
-        b: "Cross-selling attempt? Sales mein successful hone ke sapne dekh rahe ho, reality mein customer gusse mein nikal jayega.",
-        c: "Guide politely? Sahi hai, par tumse politeness expect karna desert mein baarish ka intezaar karna hai.",
-        d: "Mazaak soojha? Customer service mein tumhara brilliant future stand-up comedy mein hai."
+        a: "Expert sirf detergent ka? Tumhe Parle-G aur detergent mein antar bhi pata hai? Doubt hai humko seriously.",
+        b: "Cross-selling attempt? Sales mein successful hone ke sapne dekh rahe ho, reality mein customer gusse mein nikal jayega. Aur tum bhi job se.",
+        c: "Guide politely? Sahi hai, par tumse politeness expect karna desert mein baarish ka intezaar karna hai. Kabhi nahi hoga.",
+        d: "Mazaak soojha? Customer service mein tumhara brilliant future stand-up comedy mein hai. VMM chhod do, Netflix special karo."
       },
       // Question 7: Missing chips
       {
-        a: "Previous shift ko blame? Responsibility lene se jitna tum bhagte ho, Olympic mein gold medal milta.",
-        b: "Chup rehna? Honesty tumhari dictionary mein dhundhne se bhi nahi milegi.",
-        c: "Report to supervisor? Chamatkar! Ek sahi jawab. Probably misclick hai.",
-        d: "Khud se chips kharidna? Itna dedication dikhta toh tumhare parents proud hote."
+        a: "Previous shift ko blame? Responsibility lene se jitna tum bhagte ho, Olympic mein gold medal milta. Usain Bolt competition na de tumhe.",
+        b: "Chup rehna? Honesty tumhari dictionary mein dhundhne se bhi nahi milegi. Aur dictionary bhi tumhe dhundhna nahi aayega.",
+        c: "Report to supervisor? Chamatkar! Ek sahi jawab. Probably misclick hai. Ya fir mummy ne answer bataya?",
+        d: "Khud se chips kharidna? Itna dedication dikhta toh tumhare parents proud hote. Par hume pata hai chips tum khud kha gaye."
       },
       // Question 8: Best discount offer
       {
-        a: "BOGO? Sahi hai, par tumse yeh offer follow karne ko kaho toh 'Buy 1, Keep 1 Free for yourself' implement karoge.",
+        a: "BOGO? Sahi hai, par tumse yeh offer follow karne ko kaho toh 'Buy 1, Keep 1 Free for yourself' implement karoge. Chori chhipe.",
         b: "50% off? Calculation nahi aati toh percentage discount avoid karo, customer ko ullu banane ki ninja technique nahi hai yeh.",
-        c: "Cashback? Isse accha customer ko seedha paisa de do. At least transparent toh hoga.",
-        d: "Free samosa? Food safety inspector bhi customer ban jaega, innovation ka award milega tumhe!"
+        c: "Cashback? Isse accha customer ko seedha paisa de do. At least transparent toh hoga. Par transparency aur tum? Oil aur paani jaisa relation.",
+        d: "Free samosa? Food safety inspector bhi customer ban jaega, innovation ka award milega tumhe! Health department se fine bhi."
       },
       // Question 9: Sharma ji taking samples
       {
-        a: "Khud bhi le lo? Dono milke company ka diwaala nikal doge, excellent teamwork!",
-        b: "Selfie lena? Social media pe viral hone ke chakkar mein job se viral ho jaoge - bahar!",
-        c: "Politely inform? Accha hai, par tumhare muh se 'politely' shabd realistic nahi lagta.",
-        d: "Store mic pe announce? Privacy violation ka case karke Sharma ji tumhe job se nikalwa denge."
+        a: "Khud bhi le lo? Dono milke company ka diwaala nikal doge, excellent teamwork! Partnership mein Chor Bazaar khol lena.",
+        b: "Selfie lena? Social media pe viral hone ke chakkar mein job se viral ho jaoge - bahar! #Unemployed trending!",
+        c: "Politely inform? Accha hai, par tumhare muh se 'politely' shabd realistic nahi lagta. Tum politely bol sakte ho? Impossible.",
+        d: "Store mic pe announce? Privacy violation ka case karke Sharma ji tumhe job se nikalwa denge. Aur social media pe bhi viral karenge."
       },
       // Question 10: Measure of successful cashier
       {
-        a: "Scanning speed? Robot bana hai kya? Customer interaction ka kya?",
-        b: "Carry bag line? Haan, zindagi ka success isi mein hai - ₹5 ki carry bag bechne mein.",
-        c: "Balance efficiency & satisfaction? Theory aati hai, practical mein customer ke saamne stammer karte ho.",
-        d: "Membership card? Sales target ke chakkar mein customer ko itna pareshan karoge ki kabhi wapas na aaye."
+        a: "Scanning speed? Robot bana hai kya? Customer interaction ka kya? Koi machine laga lete tumhare jagah, at least error toh kam hota.",
+        b: "Carry bag line? Haan, zindagi ka success isi mein hai - ₹5 ki carry bag bechne mein. Nobel prize milega tumhein zarur.",
+        c: "Balance efficiency & satisfaction? Theory aati hai, practical mein customer ke saamne stammer karte ho. Aur line lagi toh panic attack.",
+        d: "Membership card? Sales target ke chakkar mein customer ko itna pareshan karoge ki kabhi wapas na aaye. Genius strategy, store band karwa dena perfect!"
       }
     ];
 
@@ -291,10 +290,10 @@ const Result = () => {
       
       case 'Rejected':
         return [
-          "Retail mein aapka future utna hi bright hai jitna powercut ke time bulb.",
-          "Sorry, but arranging onions in alphabetical order was NOT the right answer.",
-          "The committee unanimously agreed: better luck becoming a customer!",
-          "Physics walon ko pata hai F=MA. Aapko pata hai F=FAIL!"
+          "Retail mein aapka future utna hi bright hai jitna powercut ke time bulb. Zero brightness, zero hope.",
+          "Sorry, but arranging onions in alphabetical order was NOT the right answer. Dictionary padhni thi onion ko organize karne se pehle.",
+          "The committee unanimously agreed: better luck becoming a customer! Kam se kam customer service humara experience kar paoge.",
+          "Physics walon ko pata hai F=MA. Aapko pata hai F=FAIL! VMM mein aapki jagah sirf as customer hai."
         ][Math.floor(Math.random() * 4)];
       
       default:
@@ -444,12 +443,12 @@ const Result = () => {
                 onClick={() => setShowAnswerFeedback(!showAnswerFeedback)} 
                 className="w-full"
               >
-                {showAnswerFeedback ? "Hide Brutal Feedback" : "Show Answer Feedback (Warning: Brutal!)"}
+                {showAnswerFeedback ? "Hide Brutal Feedback" : "Show Answer Feedback (Warning: Extra Brutal!)"}
               </Button>
               
               {showAnswerFeedback && resultData.answers && (
                 <div className="mt-4 space-y-3 bg-gray-50 p-4 rounded-md">
-                  <p className="font-medium text-red-800">Question-by-Question Feedback:</p>
+                  <p className="font-medium text-red-800">Question-by-Question Evaluation:</p>
                   {Object.keys(resultData.answers).map(qId => {
                     const questionId = parseInt(qId);
                     return (
@@ -465,10 +464,10 @@ const Result = () => {
                     <p className="text-sm font-medium text-red-800">Overall Assessment:</p>
                     <p className="mt-1 text-red-700">
                       {resultData.score < 50 ? 
-                        "Aapke answers dekhkar hamare AI ko bhi fever aa gaya. Isse pehle ki hum bhi tumhari tarah fail ho jayein, ja rahe hain reboot hone." : 
+                        "Aapke answers dekhkar hamare AI ko bhi fever aa gaya. Isse pehle ki hum bhi tumhari tarah fail ho jayein, ja rahe hain reboot hone. Hamare expectations kum the, aap usme bhi neeche chale gaye. Waah!" : 
                         resultData.score < 75 ? 
-                        "Aapne itne galat jawab diye ki humara AI ab depression mein hai. Congratulations for this outstanding achievement!" : 
-                        "Even a broken clock is right twice a day. Tumne bhi kuch answers sahi de diye, but don't let it get to your head."}
+                        "Aapne itne galat jawab diye ki humara AI ab depression mein hai. Congratulations for this outstanding achievement! AI therapist dhoond raha hai ab." : 
+                        "Even a broken clock is right twice a day. Tumne bhi kuch answers sahi de diye, but don't let it get to your head. Kismat acchi thi, dimag nahi."}
                     </p>
                   </div>
                 </div>
@@ -477,17 +476,17 @@ const Result = () => {
 
             {resultData.status === 'Rejected' && (
               <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-md">
-                <p className="text-sm font-medium text-red-800">Additional Feedback:</p>
+                <p className="text-sm font-medium text-red-800">Special Feedback from HR:</p>
                 <p className="mt-1 text-red-700">
                   {[
-                    "Your knowledge of retail is as empty as our shelves after a sale.",
-                    "Sabziyan arrange karna bhi nahi aata, kya karenge retail mein?",
-                    "Aapke answers itne unique the ki hamara system confuse ho gaya.",
-                    "Vishal Merit Mart experience: Aap as customer achhe ho, employee nahi.",
-                    "Aapka selection aise hi ho jayega jaise dhaniya free milta hai.",
+                    "Your knowledge of retail is as empty as our shelves after a sale. Matlab ki kuch nahi hai.",
+                    "Sabziyan arrange karna bhi nahi aata, kya karenge retail mein? Bhindi ko sahi se pakad bhi nahi paoge.",
+                    "Aapke answers itne unique the ki hamara system confuse ho gaya. Wrong answers ko naya level de diya aapne.",
+                    "Vishal Merit Mart experience: Aap as customer achhe ho, employee nahi. Please shopping karne aana, kaam karne nahi.",
+                    "Aapka selection aise hi ho jayega jaise dhaniya free milta hai. Matlab kabhi nahi.",
                     "Aap retail mein utne hi successful honge jitna watermelon ko aloo kehne par customer maanta hai.",
-                    "Bhindi arrange karne ka talent aapme bilkul nahi hai. Yeh koi YouTube challenge nahi hai.",
-                    "Aap sabzi waale se discount maangne mein expert honge, lekin retail mein nahi."
+                    "Bhindi arrange karne ka talent aapme bilkul nahi hai. Yeh koi YouTube challenge nahi hai, real life hai.",
+                    "Aap sabzi waale se discount maangne mein expert honge, lekin retail mein nahi. Bargaining aur retail understanding alag cheezein hain."
                   ][Math.floor(Math.random() * 8)]}
                 </p>
               </div>
