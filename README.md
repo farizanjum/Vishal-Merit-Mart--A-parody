@@ -105,5 +105,5 @@ Built with:
 
 Made by @farizanjum – coder, creator, and meme scientist.
 
-#📌 Final Thought
+# 📌 Final Thought
 “Some build startups, some build memes — we build careers in security... kind of.”
