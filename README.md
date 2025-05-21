@@ -1,73 +1,109 @@
-# Welcome to your Lovable project
+# 🛒 Vishal Merit Mart – A Parody Exam Portal for Future MegaMart Security Guards 🤡
 
-## Project info
+> ⚠️ *Warning: This project may cause uncontrollable laughter, confusion among relatives, and job offers from meme pages. Viewer discretion is advised.*  
 
-**URL**: https://lovable.dev/projects/a32b763c-a92d-40c2-928a-4088cad50ffe
+Welcome to **Vishal Merit Mart**, the *unofficial* and *absolutely unnecessary* results portal for India’s most *mysterious* and *prestigious* underground exam:  
+**The Vishal Mega Mart Security Guard Level-3 Recruitment 2025.**
 
-## How can I edit this code?
+This parody site simulates a real exam result-checking experience — but with added chaos, masala, memes, quizzes, cutoffs, and heartbreak (the usual, right?).
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## 🤖 What is this?
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a32b763c-a92d-40c2-928a-4088cad50ffe) and start prompting.
+Vishal Merit Mart is a **fully-functioning parody web app** that lets users:
+- Check their **mock exam results**
+- Attempt the **hardest security guard quiz ever designed**
+- Download their **admit card** (for an exam that doesn't exist)
+- See **imaginary cutoff trends**
+- Cry over their **MEGAFLOP status**
+- And yes — share their result with the world like a UPSC topper 😂
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🎯 Features
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+| Feature                         | Description                                                                 |
+|----------------------------------|-----------------------------------------------------------------------------|
+| 🧾 Admit Card Generator         | Auto-generates an admit card with your name, fake roll no., and exam hall. |
+| 📊 Cutoff Chart                | See random numbers that feel official but mean nothing.                    |
+| 🧠 Mock Quiz                   | Take quizzes so ridiculous, they make GATE look like kindergarten.         |
+| 🧪 "Real Exam" Experience      | Simulates pressure, failure, and result trauma — all for laughs.           |
+| 📈 Merit List                  | See your rank compared to Raju Bhai and Sweety Pandey (the OG toppers).    |
+| 😂 Meme Mode                  | UI built to look like a real govt portal — but it's all just ✨ satire ✨.   |
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🎬 Promo Video (coming soon...)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+> “Aaj ka result... kisi ki zindagi badal dega... aur kisi ko *out of stock* bana dega.”
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Check out the full meme ad on Instagram, YouTube Shorts, TikTok or wherever memes go to become viral legends.
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+## 💻 Tech Stack
+
+- **Frontend**: HTML, CSS, JavaScript (no frameworks – raw as the pain of failure)
+- **Logo**: Inspired by Vishal Mega Mart, but turned into *Vishal Merit Mart* (we’re sorry, not sorry 😭)
+- **Backend (optional)**: JSON-based mock results or local storage-based dynamic result gen
+- **Design**: Retro government-style parody with legit-looking banners and absurd UI elements
+
+---
+
+## 🧪 Demo Test Question Samples
+
+Q: If 2 customers enter Vishal Mart and 5 leave, how many are left inside?
+A) Full
+B) Out of Stock
+C) Security is sleeping
+D) Cancelled
+
+Q: What is the motto of Vishal Merit Mart?
+A) Shop Smart
+B) Guard Hard
+C) Result Fraud
+D) All of the above ✅
+
+---
+
+
+## 🧾 Disclaimer
+
+This entire website is created **just for entertainment and meme purposes**.  
+We are in no way affiliated with *Vishal Mega Mart* (please don’t sue us 🙏).  
+If you're HR from Vishal Mega Mart reading this... respect for the real guards, this one's for the memes only 🫡
+
+---
+
+## 🚀 How to Run
+
+```bash
+git clone https://github.com/farizanjum/Vishal-Merit-Mart--A-parody.git
+cd Vishal-Merit-Mart--A-parody
+open index.html  # or just double-click it if you're old school
 ```
+Note: Website works best when shared in your friend group WhatsApp chats at 2AM.
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+##📣 Call to Action
 
-**Use GitHub Codespaces**
+-Tag your friends.
+-Fake flex your rank.
+-Confuse your relatives.
+-Spread the chaos.
+-Make it viral.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Become a "Topper" at Vishal Merit Mart.
 
-## What technologies are used for this project?
+33🤝 Credits
 
-This project is built with:
+Built with:
+1% code
+99% satire
+100% heartbroken aspirants' energy
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Made by @farizanjum – coder, creator, and meme scientist.
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/a32b763c-a92d-40c2-928a-4088cad50ffe) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+##📌 Final Thought
+“Some build startups, some build memes — we build careers in security... kind of.”
