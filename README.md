@@ -86,7 +86,7 @@ open index.html  # or just double-click it if you're old school
 Note: Website works best when shared in your friend group WhatsApp chats at 2AM.
 
 
-##📣 Call to Action
+#📣 Call to Action
 
 -Tag your friends.
 -Fake flex your rank.
@@ -96,7 +96,7 @@ Note: Website works best when shared in your friend group WhatsApp chats at 2AM.
 
 Become a "Topper" at Vishal Merit Mart.
 
-33🤝 Credits
+#🤝 Credits
 
 Built with:
 1% code
@@ -105,5 +105,5 @@ Built with:
 
 Made by @farizanjum – coder, creator, and meme scientist.
 
-##📌 Final Thought
+#📌 Final Thought
 “Some build startups, some build memes — we build careers in security... kind of.”
