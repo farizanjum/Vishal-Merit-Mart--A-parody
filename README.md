@@ -7,6 +7,8 @@ Welcome to **Vishal Merit Mart**, the *unofficial* and *absolutely unnecessary* 
 
 This parody site simulates a real exam result-checking experience — but with added chaos, masala, memes, quizzes, cutoffs, and heartbreak (the usual, right?).
 
+<a href="https://ibb.co/6RhqYRsf"><img src="https://i.ibb.co/tMf1BMCW/Promotional-for-batch-vmm.jpg" alt="Promotional-for-batch-vmm" border="0"></a>
+
 ---
 
 ## 🤖 What is this?
